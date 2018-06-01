@@ -1,0 +1,21 @@
+<div>
+  <mat-form-field>
+    <input [(ngModel)]="entity.firstName" matInput placeholder="First Name">
+    <mat-hint class="{{getMessageClass('firstName')}}">{{getMessage('firstName')}}</mat-hint>
+  </mat-form-field>
+  <mat-form-field>
+    <input [(ngModel)]="entity.lastName" matInput placeholder="Last Name">
+    <mat-hint class="{{getMessageClass('lastName')}}">{{getMessage('lastName')}}</mat-hint>
+  </mat-form-field>
+  <mat-form-field>
+    <input [(ngModel)]="entity.email" matInput placeholder="Email">
+    <mat-hint class="{{getMessageClass('email')}}">{{getMessage('email')}}</mat-hint>
+  </mat-form-field>
+  <mat-form-field>
+    <input [(ngModel)]="entity.dob" matInput [matDatepicker]="myDatepicker">
+    <mat-hint class="{{getMessageClass('dob')}}">{{getMessage('dob')}}</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+    <mat-datepicker #myDatepicker></mat-datepicker>
+  </mat-form-field>
+  <button mat-raised-button (click)="save()">Submit</button>
+</div>
