@@ -1,0 +1,34 @@
+<div id="employees-table">
+  <mat-toolbar>
+    <!-- todo paging and results size-->
+  </mat-toolbar>
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef>
+          <mat-icon [routerLink]="['../create']">add_box</mat-icon>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let emp">
+        <mat-icon [routerLink]="['../update/', emp.id]">edit</mat-icon>
+        <mat-icon (click)="delete(emp.id)">delete</mat-icon>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+      <mat-cell *matCellDef="let emp"> {{emp.firstName}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+      <mat-cell *matCellDef="let emp"> {{emp.lastName}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+      <mat-cell *matCellDef="let emp"> {{emp.email}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="dob">
+      <mat-header-cell *matHeaderCellDef> Date Of Birth </mat-header-cell>
+      <mat-cell *matCellDef="let emp"> {{emp.dob}} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

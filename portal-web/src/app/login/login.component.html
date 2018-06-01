@@ -1,0 +1,11 @@
+<div>
+  <mat-form-field>
+    <input [(ngModel)]="user.username" matInput placeholder="User Name">
+    <mat-hint class="{{getMessageClass('username')}}">{{getMessage('username')}}</mat-hint>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="password" [(ngModel)]="user.password" matInput placeholder="Password">
+    <mat-hint class="{{getMessageClass('password')}}">{{getMessage('password')}}</mat-hint>
+  </mat-form-field>
+  <button mat-raised-button (click)="save()">Login</button>
+</div>
