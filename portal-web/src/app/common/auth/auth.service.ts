@@ -31,4 +31,13 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
+  public isAuthenticated(): boolean {
+    if (localStorage.getItem('token') != null) {
+      //TODO also check is this is not expired
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }
