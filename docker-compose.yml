@@ -1,0 +1,10 @@
+portal-web:
+  build: ./portal-web
+  container_name: portal-web
+  ports:
+  - "81:80"
+portal-app:
+  image: portal/portal-app:latest
+  container_name: portal-app
+  ports:
+  - "8080:8080"
