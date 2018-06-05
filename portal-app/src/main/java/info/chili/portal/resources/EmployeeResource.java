@@ -10,14 +10,13 @@ import info.chili.portal.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -38,9 +37,8 @@ public class EmployeeResource {
     }
 
     @GetMapping(ROOT_URI)
-    public Page<Employee> queryAll(@RequestParam(name = "page", defaultValue = "0") Integer page, @RequestParam(name = "size", defaultValue = "10") Integer size) {
-        PageRequest pageRequest = PageRequest.of(page, size);
-        return employeeRepository.findAll(pageRequest);
+    public Page<Employee> queryAll(Pageable pageable) {
+        return employeeRepository.findAll(pageable);
     }
 
     @GetMapping((ROOT_URI) + "/{id}")

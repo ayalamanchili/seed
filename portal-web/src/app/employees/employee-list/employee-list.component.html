@@ -4,7 +4,7 @@
   </mat-toolbar>
   <mat-paginator [length]="page.totalElements" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; onPaginateChange($event)">
   </mat-paginator>
-  <mat-table [dataSource]="dataSource">
+  <mat-table [dataSource]="dataSource" matSort matSortActive="name" (matSortChange)="sortData($event)" matSortDirection="asc" matSortDisableClear>
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef>
         <mat-icon [routerLink]="['../create']">add_box</mat-icon>
@@ -15,7 +15,7 @@
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="firstName">
-      <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> First Name </mat-header-cell>
       <mat-cell *matCellDef="let emp"> {{emp.firstName}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="lastName">

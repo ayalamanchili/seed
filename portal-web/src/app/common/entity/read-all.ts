@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { OnInit } from '@angular/core';
 import { CrudService } from './crud.service';
-import { MatSnackBar, PageEvent, MatPaginator, MatSort } from '@angular/material';
+import { MatSnackBar, PageEvent, MatPaginator, Sort } from '@angular/material';
 import { ApiErrorMessage } from '../../common/model/api-error-message';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApiError } from '../../common/model/api-error';
@@ -18,10 +18,8 @@ export abstract class ReadAll<T> implements OnInit {
 
     dataSource: DataSource<T>;
 
-    // MatPaginator 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
     page: Page<T> = new Page();
+    sort: Sort;
     pageNumber: number = 0;
     pageEvent: PageEvent;
     pageSize = 10;
@@ -42,7 +40,7 @@ export abstract class ReadAll<T> implements OnInit {
     abstract getDisplayedColumns();
 
     getData() {
-        this.crudService.readAll(this.pageNumber , this.pageSize).subscribe(data => {
+        this.crudService.readAll(this.pageNumber, this.pageSize, this.sort).subscribe(data => {
             this.page = data;
             this.dataSource = new EntityDataSource(of(this.page.content));
         });
@@ -50,6 +48,12 @@ export abstract class ReadAll<T> implements OnInit {
 
     public onPaginateChange(event: PageEvent) {
         this.pageNumber = event.pageIndex;
+        this.getData();
+    }
+
+    public sortData(sort: Sort) {
+        console.log(sort.active);
+        this.sort = sort;
         this.getData();
     }
 

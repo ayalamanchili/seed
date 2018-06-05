@@ -44,9 +44,17 @@ public class PortalInit implements ApplicationRunner {
         Set<ApplicationRole> roles = new HashSet();
         roles.add(applicationRoleRepository.save(ApplicationRole.builder().roleName("ROLE_ADMIN").build()));
         applicationUserRepository.save(ApplicationUser.builder().username("admin").password(bCryptPasswordEncoder.encode("password")).build());
-        for (Integer i = 0; i < 37; i++) {
-            employeeRepository.save(Employee.builder().firstName(i.toString() + "emp").lastName(i.toString() + "emp").email(i.toString() + "email@gmail.com").dob(new Date()).build());
-        }
+        employeeRepository.save(Employee.builder().firstName("aaa").lastName("aaa").email("aaa@gmail.com").dob(new Date()).build());
+        employeeRepository.save(Employee.builder().firstName("bbb").lastName("bbb").email("bbb@gmail.com").dob(new Date()).build());
+        employeeRepository.save(Employee.builder().firstName("ccc").lastName("ccc").email("ccc@gmail.com").dob(new Date()).build());
+        employeeRepository.save(Employee.builder().firstName("ddd").lastName("ccc").email("ccc@gmail.com").dob(new Date()).build());
+        employeeRepository.save(Employee.builder().firstName("eee").lastName("ccc").email("ccc@gmail.com").dob(new Date()).build());
+        employeeRepository.save(Employee.builder().firstName("fff").lastName("ccc").email("ccc@gmail.com").dob(new Date()).build());
+        employeeRepository.save(Employee.builder().firstName("ggg").lastName("ccc").email("ccc@gmail.com").dob(new Date()).build());
+        employeeRepository.save(Employee.builder().firstName("hhh").lastName("ccc").email("ccc@gmail.com").dob(new Date()).build());
+        employeeRepository.save(Employee.builder().firstName("iii").lastName("ccc").email("ccc@gmail.com").dob(new Date()).build());
+        employeeRepository.save(Employee.builder().firstName("jjj").lastName("ccc").email("ccc@gmail.com").dob(new Date()).build());
+        employeeRepository.save(Employee.builder().firstName("kkk").lastName("ccc").email("ccc@gmail.com").dob(new Date()).build());
     }
 
 }

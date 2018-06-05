@@ -4,6 +4,7 @@ import { EmployeeService } from '../employee.service';
 import { Employee } from '../employee';
 import { ReadAll } from '../../common/entity/read-all';
 import { MatSnackBar } from '@angular/material';
+
 @Component({
   selector: 'employees/employee-list',
   templateUrl: './employee-list.component.html',

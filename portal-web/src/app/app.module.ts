@@ -6,7 +6,7 @@ import { MyNavComponent } from './my-nav/my-nav.component';
 import { Routes, RouterModule } from '@angular/router';
 import { RoutesMap } from './router/routes-map';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatInputModule, MatListModule, MatMenuModule, MatCardModule, MatGridListModule, MatButtonModule, MatSelectModule, MatIconModule, MatTableModule, MatPaginatorModule, MatSidenavModule, MatToolbarModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule, MatProgressBarModule, MatSnackBarModule, MatProgressBar, MatPaginator } from '@angular/material';
+import { MatInputModule, MatListModule, MatMenuModule, MatCardModule, MatGridListModule, MatButtonModule, MatSelectModule, MatIconModule, MatTableModule,MatSortModule, MatPaginatorModule, MatSidenavModule, MatToolbarModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule, MatProgressBarModule, MatSnackBarModule, MatProgressBar, MatPaginator } from '@angular/material';
 import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
@@ -49,6 +49,7 @@ import { EmployeesComponent } from './employees/employees.component';
     MatProgressBarModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
     MatGridListModule,
     MatCardModule,
     MatMenuModule,

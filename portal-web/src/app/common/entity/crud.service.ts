@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Page } from 'src/app/common/model/page';
+import { Sort } from '@angular/material';
 
 @Injectable()
 export abstract class CrudService<T> {
@@ -12,8 +13,12 @@ export abstract class CrudService<T> {
     this.http = http;
   }
 
-  readAll(start: number, limit: number): Observable<Page<T>> {
-    return this.http.get<Page<T>>(this.getReadAllURI() + "?page=" + start + "&size=" + limit);
+  readAll(start: number, limit: number, sort: Sort): Observable<Page<T>> {
+    var url = this.getReadAllURI() + "?page=" + start + "&size=" + limit;
+    if (sort != null) {
+      url = url + "&sort=" + sort.active + "," + sort.direction;
+    }
+    return this.http.get<Page<T>>(url);
   }
 
   read(id: number): Observable<T> {
