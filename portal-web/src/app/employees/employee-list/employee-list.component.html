@@ -2,10 +2,12 @@
   <mat-toolbar>
     <!-- todo paging and results size-->
   </mat-toolbar>
+  <mat-paginator [length]="page.totalElements" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; onPaginateChange($event)">
+  </mat-paginator>
   <mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef>
-          <mat-icon [routerLink]="['../create']">add_box</mat-icon>
+        <mat-icon [routerLink]="['../create']">add_box</mat-icon>
       </mat-header-cell>
       <mat-cell *matCellDef="let emp">
         <mat-icon [routerLink]="['../update/', emp.id]">edit</mat-icon>

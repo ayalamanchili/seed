@@ -1,11 +1,14 @@
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 import { OnInit } from '@angular/core';
 import { CrudService } from './crud.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, PageEvent, MatPaginator, MatSort } from '@angular/material';
 import { ApiErrorMessage } from '../../common/model/api-error-message';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApiError } from '../../common/model/api-error';
+import { Page } from 'src/app/common/model/page';
+import { ViewChild } from '@angular/core';
 
 export abstract class ReadAll<T> implements OnInit {
 
@@ -15,20 +18,39 @@ export abstract class ReadAll<T> implements OnInit {
 
     dataSource: DataSource<T>;
 
+    // MatPaginator 
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
+    page: Page<T> = new Page();
+    pageNumber: number = 0;
+    pageEvent: PageEvent;
+    pageSize = 10;
+    pageSizeOptions = [5, 10, 25, 100];
+
+
     displayedColumns = this.getDisplayedColumns();
 
     constructor(crudService: CrudService<T>, private snackBar: MatSnackBar) {
         this.crudService = crudService;
     }
-
+    //TODO on view init?
     ngOnInit() {
-        this.dataSource = new EntityDataSource(this.getEntities());
+        this.getData();
+
     }
 
     abstract getDisplayedColumns();
 
-    getEntities(): Observable<T[]> {
-        return this.crudService.readAll();
+    getData() {
+        this.crudService.readAll(this.pageNumber , this.pageSize).subscribe(data => {
+            this.page = data;
+            this.dataSource = new EntityDataSource(of(this.page.content));
+        });
+    }
+
+    public onPaginateChange(event: PageEvent) {
+        this.pageNumber = event.pageIndex;
+        this.getData();
     }
 
     delete(id: number) {

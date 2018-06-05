@@ -14,7 +14,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,7 +39,7 @@ public class Employee implements Serializable {
     protected String firstName;
     @NotEmpty
     protected String lastName;
-    @Past
+    
     @Temporal(TemporalType.DATE)
     protected Date dob;
     @Email

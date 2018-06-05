@@ -44,9 +44,9 @@ public class PortalInit implements ApplicationRunner {
         Set<ApplicationRole> roles = new HashSet();
         roles.add(applicationRoleRepository.save(ApplicationRole.builder().roleName("ROLE_ADMIN").build()));
         applicationUserRepository.save(ApplicationUser.builder().username("admin").password(bCryptPasswordEncoder.encode("password")).build());
-        employeeRepository.save(Employee.builder().firstName("aaa").lastName("111").email("aaa111@gmail.com").dob(new Date()).build());
-        employeeRepository.save(Employee.builder().firstName("bbb").lastName("222").email("bbb222@gmail.com").build());
-        employeeRepository.save(Employee.builder().firstName("ccc").lastName("333").email("ccc333@gmail.com").build());
+        for (Integer i = 0; i < 37; i++) {
+            employeeRepository.save(Employee.builder().firstName(i.toString() + "emp").lastName(i.toString() + "emp").email(i.toString() + "email@gmail.com").dob(new Date()).build());
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Page } from 'src/app/common/model/page';
 
 @Injectable()
 export abstract class CrudService<T> {
@@ -11,8 +12,8 @@ export abstract class CrudService<T> {
     this.http = http;
   }
 
-  readAll(): Observable<T[]> {
-    return this.http.get<T[]>(this.getReadAllURI());
+  readAll(start: number, limit: number): Observable<Page<T>> {
+    return this.http.get<Page<T>>(this.getReadAllURI() + "?page=" + start + "&size=" + limit);
   }
 
   read(id: number): Observable<T> {
