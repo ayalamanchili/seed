@@ -21,6 +21,7 @@ import { LoaderComponent } from 'src/app/common/loader/loader.component';
 import { CreateEmployeeComponent } from './employees/create-employee/create-employee.component';
 import { UpdateEmployeeComponent } from './employees/update-employee/update-employee.component';
 import { EmployeesComponent } from './employees/employees.component';
+import { ReadAllComponent } from './common/entity/read-all/read-all.component';
 
 @NgModule({
   declarations: [

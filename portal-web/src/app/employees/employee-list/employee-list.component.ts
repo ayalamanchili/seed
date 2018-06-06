@@ -2,22 +2,25 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { EmployeeService } from '../employee.service';
 import { Employee } from '../employee';
-import { ReadAll } from '../../common/entity/read-all';
 import { MatSnackBar } from '@angular/material';
+import { ReadAllComponent } from 'src/app/common/entity/read-all/read-all.component';
 
 @Component({
   selector: 'employees/employee-list',
-  templateUrl: './employee-list.component.html',
+  templateUrl: '../../common/entity/read-all/read-all.component.html',
   styleUrls: ['./employee-list.component.css']
 })
-export class EmployeeListComponent extends ReadAll<Employee> implements OnInit {
+export class EmployeeListComponent extends ReadAllComponent<Employee> implements OnInit {
 
   constructor(employeeService: EmployeeService<Employee>, snackBar: MatSnackBar) {
     super(employeeService, snackBar);
   }
 
-  getDisplayedColumns(): string[] {
-    return ['action', 'firstName', 'lastName', 'email', 'dob'];
+  getColumns(): string[] {
+    return ['firstName', 'lastName', 'email', 'dob'];
   }
 
+  getID(): string {
+    return "employee";
+  }
 }
