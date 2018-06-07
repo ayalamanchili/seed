@@ -30,10 +30,10 @@ export abstract class ReadAllComponent<T> implements OnInit {
   columns: string[] = this.getColumns();
   displayedColumns: string[] = this.getDisplayedColumns();
 
-
   constructor(crudService: CrudService<T>, private snackBar: MatSnackBar) {
     this.crudService = crudService;
   }
+
   //TODO on view init?
   ngOnInit() {
     this.getData();
@@ -42,7 +42,7 @@ export abstract class ReadAllComponent<T> implements OnInit {
   abstract getColumns(): string[];
 
   getDisplayedColumns(): string[] {
-    return this.columns.concat('action').reverse();
+    return ['action'].concat(this.getColumns());
   }
 
   abstract getID();
@@ -51,6 +51,12 @@ export abstract class ReadAllComponent<T> implements OnInit {
     this.crudService.readAll(this.pageNumber, this.pageSize, this.sort).subscribe(data => {
       this.page = data;
       this.dataSource = new EntityDataSource(of(this.page.content));
+    });
+  }
+
+  public getColumnDisplayName(columnName: string): string {
+    return columnName.replace(/^[a-z]|[A-Z]/g, function (v, i) {
+      return i === 0 ? v.toUpperCase() : " " + v.toLowerCase();
     });
   }
 
@@ -72,13 +78,13 @@ export abstract class ReadAllComponent<T> implements OnInit {
         this.afterDeleteAction();
       },
       error => {
-
+        console.log(error);
       }
     );
   }
 
   afterDeleteAction() {
-    this.ngOnInit();
+    this.getData();
   }
 
   getDeleteSuccessfullMessage(): string {
@@ -94,10 +100,8 @@ export abstract class ReadAllComponent<T> implements OnInit {
       return Observable.throw(error.error());
       //TODO other errors like 500,timeout etc...
     }
-
   }
 }
-
 
 export class EntityDataSource<T> extends DataSource<T>  {
 
@@ -108,8 +112,6 @@ export class EntityDataSource<T> extends DataSource<T>  {
   connect(): Observable<T[]> {
     return this.entities;
   }
-  disconnect() {
-
-  }
+  disconnect() { }
 
 }

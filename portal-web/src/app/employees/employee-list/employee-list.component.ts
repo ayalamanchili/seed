@@ -20,6 +20,13 @@ export class EmployeeListComponent extends ReadAllComponent<Employee> implements
     return ['firstName', 'lastName', 'email', 'dob'];
   }
 
+  public getColumnDisplayName(columnName: string): string {
+    if (columnName == 'dob') {
+      return "Date Of Birth"
+    }
+    return super.getColumnDisplayName(columnName);
+  }
+
   getID(): string {
     return "employee";
   }
