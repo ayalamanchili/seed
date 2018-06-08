@@ -10,15 +10,21 @@ import { Crud } from '../../common/entity/crud';
 import { Create } from '../../common/entity/create';
 import { EmployeeService } from '../employee.service';
 import { Location } from '@angular/common';
+import { CreateComponent } from 'src/app/common/entity/create/create.component';
+import { Field } from 'src/app/common/model/field';
 
 @Component({
   selector: 'app-create-employee',
-  templateUrl: './create-employee.component.html',
+  templateUrl: '../../common/entity/create/create.component.html',
   styleUrls: ['./create-employee.component.scss']
 })
-export class CreateEmployeeComponent<Employee> extends Create<Employee> {
+export class CreateEmployeeComponent<Employee> extends CreateComponent<Employee> {
 
   constructor(employeesService: EmployeeService<Employee>, router: Router, snackBar: MatSnackBar, location: Location) {
     super(employeesService, router, snackBar, location);
+  }
+
+  getFields(): Field[] {
+    return [new Field('firstName', null, null), new Field('lastName', null, null), new Field('email', null, null), new Field('dob', 'Date Of Birth', 'date')];
   }
 }

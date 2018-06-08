@@ -2,12 +2,14 @@ import { ApiErrorMessage } from '../../common/model/api-error-message';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApiError } from '../../common/model/api-error';
 import { Observable } from 'rxjs';
+import { Field } from 'src/app/common/model/field';
 
 export abstract class Crud<T> {
     entityId: number;
     entity: T;
     validationErrors: ApiErrorMessage[];
 
+    fields: Field[] = this.getFields();
 
     constructor() {
         this.entity = {} as T;
@@ -69,5 +71,7 @@ export abstract class Crud<T> {
             return true;
         }
     }
-    
+
+    abstract getFields(): Field[];
+
 }

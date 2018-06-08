@@ -22,6 +22,9 @@ import { CreateEmployeeComponent } from './employees/create-employee/create-empl
 import { UpdateEmployeeComponent } from './employees/update-employee/update-employee.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { ReadAllComponent } from './common/entity/read-all/read-all.component';
+import { ReadComponent } from './common/entity/read/read.component';
+import { CreateComponent } from './common/entity/create/create.component';
+import { UpdateComponent } from './common/entity/update/update.component';
 
 @NgModule({
   declarations: [
