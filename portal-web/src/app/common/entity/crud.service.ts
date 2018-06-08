@@ -14,11 +14,7 @@ export abstract class CrudService<T> {
   }
 
   readAll(start: number, limit: number, sort: Sort): Observable<Page<T>> {
-    var url = this.getReadAllURI() + "?page=" + start + "&size=" + limit;
-    if (sort != null) {
-      url = url + "&sort=" + sort.active + "," + sort.direction;
-    }
-    return this.http.get<Page<T>>(url);
+    return this.http.get<Page<T>>(this.getReadAllURI(start, limit, sort, null));
   }
 
   read(id: number): Observable<T> {
@@ -33,12 +29,23 @@ export abstract class CrudService<T> {
     return this.http.delete<T>(this.getDeleteURI(id));
   }
 
+  search(start: number, limit: number, sort: Sort, search: string): Observable<Page<T>> {
+    return this.http.get<Page<T>>(this.getSearchURI(start, limit, sort, search));
+  }
+
   getReadURI(id: number): string {
     return this.getURI() + "/" + id;
   }
 
-  getReadAllURI(): string {
-    return this.getURI();
+  getReadAllURI(start: number, limit: number, sort: Sort, search: string): string {
+    var url = this.getURI() + "?page=" + start + "&size=" + limit;
+    if (sort != null) {
+      url = url + "&sort=" + sort.active + "," + sort.direction;
+    }
+    if (search != null) {
+      url = url + search;
+    }
+    return url;
   }
 
   getSaveURI(): string {
@@ -47,6 +54,11 @@ export abstract class CrudService<T> {
 
   getDeleteURI(id: number): string {
     return this.getURI() + "/" + id;
+  }
+
+  getSearchURI(start: number, limit: number, sort: Sort, search: string): string {
+    console.log(this.getReadAllURI(start, limit, sort, search));
+    return this.getReadAllURI(start, limit, sort, search);
   }
 
   abstract getURI(): string;

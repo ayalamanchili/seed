@@ -18,6 +18,8 @@ export abstract class ReadAllComponent<T> implements OnInit {
 
   crudService: CrudService<T>;
 
+  entity: T;
+
   dataSource: DataSource<T>;
 
   page: Page<T> = new Page();
@@ -31,9 +33,13 @@ export abstract class ReadAllComponent<T> implements OnInit {
   displayedColumns: string[] = this.getDisplayedColumns();
 
   constructor(crudService: CrudService<T>, private snackBar: MatSnackBar) {
+    this.entity = {} as T;
     this.crudService = crudService;
   }
 
+  getSearchTab(): string {
+    return "app-search-employee";
+  }
   //TODO on view init?
   ngOnInit() {
     this.getData();
@@ -54,6 +60,29 @@ export abstract class ReadAllComponent<T> implements OnInit {
     });
   }
 
+
+  search() {
+    this.crudService.search(this.pageNumber, this.pageSize, this.sort, this.getSearchUrl()).subscribe(data => {
+      this.page = data;
+      this.dataSource = new EntityDataSource(of(this.page.content));
+    });
+  }
+
+  clearSearch() {
+    this.entity = {} as T;
+    this.getData();
+  }
+  getSearchUrl(): string {
+    var search = "&search=";
+    for (let property of this.getColumns()) {
+      if (this.entity[property] != null) {
+        search = search + property + ":" + this.entity[property] + ",";
+      }
+    }
+    console.log(search);
+    return search;
+  }
+
   public getColumnDisplayName(columnName: string): string {
     return columnName.replace(/^[a-z]|[A-Z]/g, function (v, i) {
       return i === 0 ? v.toUpperCase() : " " + v.toLowerCase();
@@ -66,7 +95,6 @@ export abstract class ReadAllComponent<T> implements OnInit {
   }
 
   public sortData(sort: Sort) {
-    console.log(sort.active);
     this.sort = sort;
     this.getData();
   }

@@ -1,9 +1,16 @@
 <div [id]="getID()+'-table'">
   <mat-toolbar>
-    <!-- todo paging and results size-->
+    <div>
+      <mat-form-field *ngFor="let column of columns">
+        <input [(ngModel)]="entity[column]" matInput placeholder="{{getColumnDisplayName(column)}}">
+        <!-- <mat-hint class="{{getMessageClass('firstName')}}">{{getMessage('firstName')}}</mat-hint> -->
+      </mat-form-field>
+      <button mat-raised-button (click)="search()">Search</button>
+      <button mat-raised-button (click)="clearSearch()">Clear</button>
+    </div>
+    <mat-paginator [length]="page.totalElements" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; onPaginateChange($event)">
+    </mat-paginator>
   </mat-toolbar>
-  <mat-paginator [length]="page.totalElements" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; onPaginateChange($event)">
-  </mat-paginator>
   <mat-table [dataSource]="dataSource" matSort matSortActive="name" (matSortChange)="sortData($event)" matSortDirection="asc"
     matSortDisableClear>
     <ng-container matColumnDef="action">
