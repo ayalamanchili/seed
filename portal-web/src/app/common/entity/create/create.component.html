@@ -3,6 +3,7 @@
     <!-- string  field-->
     <div *ngIf="field.isStringField()">
       <input [(ngModel)]="entity[field.name]" matInput placeholder="{{field.getColumnDisplayName(field.name)}}">
+      <mat-error *ngIf="!isValid()">{{getMessage(field.name)}}</mat-error>
       <!-- <mat-hint class="{{getMessageClass(field.name)}}">{{getMessage(field.name)}}</mat-hint> -->
     </div>
     <!-- Date field-->

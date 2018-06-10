@@ -3,7 +3,6 @@
     <!-- string  field-->
     <div *ngIf="field.isStringField()">
       <input [(ngModel)]="entity[field.name]" matInput placeholder="{{field.getColumnDisplayName(field.name)}}">
-      <!-- <mat-hint class="{{getMessageClass(field.name)}}">{{getMessage(field.name)}}</mat-hint> -->
     </div>
     <!-- Date field-->
     <div *ngIf="field.isDateField()">

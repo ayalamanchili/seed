@@ -1,4 +1,4 @@
 export class ApiErrorMessage {
-    key: string;
-    message: string;
+    field: string;
+    defaultMessage: string;
 }
