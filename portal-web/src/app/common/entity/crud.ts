@@ -47,6 +47,7 @@ export abstract class Crud<T> {
         } else {
             for (let errMsg of this.validationErrors) {
                 if (errMsg.field === key) {
+                    console.log(errMsg.defaultMessage);
                     return errMsg.defaultMessage;
                 }
             }

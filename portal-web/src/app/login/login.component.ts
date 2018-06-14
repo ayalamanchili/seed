@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.authService.logout();
-    this.user= new User();
+    this.user = new User();
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
@@ -58,8 +58,8 @@ export class LoginComponent implements OnInit {
       return null;
     } else {
       for (let errMsg of this.validationErrors) {
-        if (errMsg.key === key) {
-          return errMsg.message;
+        if (errMsg.field === key) {
+          return errMsg.defaultMessage;
         }
       }
     }
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
   getMessageClass(key: string) {
     if (this.validationErrors && this.validationErrors.length > 0) {
       for (let errMsg of this.validationErrors) {
-        if (errMsg.key === key) {
+        if (errMsg.field === key) {
           return "mat-error";
         }
       }

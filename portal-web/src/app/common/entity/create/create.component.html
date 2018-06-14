@@ -1,18 +1,15 @@
 <div>
   <mat-form-field *ngFor="let field of fields">
     <!-- string  field-->
-    <div *ngIf="field.isStringField()">
-      <input [(ngModel)]="entity[field.name]" matInput placeholder="{{field.getColumnDisplayName(field.name)}}">
-      <mat-error *ngIf="!isValid()">{{getMessage(field.name)}}</mat-error>
-      <!-- <mat-hint class="{{getMessageClass(field.name)}}">{{getMessage(field.name)}}</mat-hint> -->
-    </div>
+    <input *ngIf="field.isStringField()" [(ngModel)]="entity[field.name]" matInput placeholder="{{field.getColumnDisplayName(field.name)}}">
     <!-- Date field-->
-    <div *ngIf="field.isDateField()">
-      <input *ngIf="field.isDateField()" [(ngModel)]="entity[field.name]" matInput placeholder="{{field.getColumnDisplayName(field.name)}}"
-        [matDatepicker]="myDatepicker">
-      <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-      <mat-datepicker #myDatepicker></mat-datepicker>
-      <!-- <mat-hint class="{{getMessageClass(field.name)}}" [value]="getMessage(field.name)">{{getMessage(field.name)}</mat-hint> -->
+    <input *ngIf="field.isDateField()" [(ngModel)]="entity[field.name]" matInput placeholder="{{field.getColumnDisplayName(field.name)}}"
+      [matDatepicker]="myDatepicker">
+    <mat-datepicker-toggle *ngIf="field.isDateField()" matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+    <mat-datepicker #myDatepicker></mat-datepicker>
+    <!-- validation error -->
+    <div>
+      <mat-error *ngIf="!isValid()">{{getMessage(field.name)}}</mat-error>
     </div>
   </mat-form-field>
   <button mat-raised-button (click)="save()">Save</button>
