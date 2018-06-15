@@ -1,7 +1,7 @@
 <div>
   <mat-form-field *ngFor="let field of fields">
     <!-- string  field-->
-    <input [(ngModel)]="entity[field.name]" matInput placeholder="{{field.getColumnDisplayName(field.name)}}">
+    <input *ngIf="field.isStringField()" [(ngModel)]="entity[field.name]" matInput placeholder="{{field.getColumnDisplayName(field.name)}}">
     <!-- Date field-->
     <input *ngIf="field.isDateField()" [(ngModel)]="entity[field.name]" matInput placeholder="{{field.getColumnDisplayName(field.name)}}"
       [matDatepicker]="myDatepicker">
