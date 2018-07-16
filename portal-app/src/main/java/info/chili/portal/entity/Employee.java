@@ -5,11 +5,9 @@
  */
 package info.chili.portal.entity;
 
-import java.io.Serializable;
+import info.chili.jpa.AbstractAuditEntity;
 import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
@@ -18,8 +16,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-
 
 /**
  *
@@ -30,16 +26,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Employee implements Serializable {
+public class Employee extends AbstractAuditEntity {
 
-    @Id
-    @GeneratedValue
-    protected Long id;
     @NotEmpty
     protected String firstName;
     @NotEmpty
     protected String lastName;
-    
+
     @Temporal(TemporalType.DATE)
     protected Date dob;
     @Email

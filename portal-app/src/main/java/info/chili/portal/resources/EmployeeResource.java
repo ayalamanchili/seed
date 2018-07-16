@@ -5,7 +5,7 @@
  */
 package info.chili.portal.resources;
 
-import info.chili.commons.search.EntitySpecificationBuilder;
+import info.chili.search.EntitySpecificationBuilder;
 import info.chili.portal.dao.EmployeeRepository;
 import info.chili.portal.entity.Employee;
 import java.util.regex.Matcher;
